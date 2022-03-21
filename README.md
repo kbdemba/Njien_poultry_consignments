@@ -2,4 +2,5 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Njien Poultry Consignment
 
-A web app to hanldle the calculations of consignments by Njien Poultry
+A web app to hanldle the saving and calculations of consignments by Njien Poultry
+
