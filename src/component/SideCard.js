@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 
 
 function SideCard(props) {
@@ -29,7 +28,7 @@ function SideCard(props) {
       }}
     >
       <Box py={1} display={'flex'} justifyContent='space-between' alignItems='center'>
-        <Typography variant='body2' color='textSecondary'>Conversion per 500 CFA</Typography>
+        <Typography variant='body2' color='textSecondary'>Conversion / 500 CFA</Typography>
         <Typography>{conversion}</Typography>
       </Box>
       <Box py={1} display={'flex'} justifyContent='space-between' alignItems='center'>
@@ -41,10 +40,6 @@ function SideCard(props) {
         <Typography>{laborBag}</Typography>
       </Box>
       <Box py={1} display={'flex'} justifyContent='space-between' alignItems='center'>
-        <Typography variant='body2' color='textSecondary'>Number of Items</Typography>
-        <Typography>{totalItems}</Typography>
-      </Box>
-      <Box py={1} display={'flex'} justifyContent='space-between' alignItems='center'>
         <Typography variant='body2' color='textSecondary'>Total Bags</Typography>
         <Typography>{totalBags}</Typography>
       </Box>
@@ -52,6 +47,11 @@ function SideCard(props) {
         <Typography variant='body2' color='textSecondary'>Total Weights</Typography>
         <Typography>{totalweight} tons</Typography>
       </Box>
+      <Box py={1} display={'flex'} justifyContent='space-between' alignItems='center'>
+        <Typography variant='body2' color='textSecondary'>Number of Items</Typography>
+        <Typography>{totalItems}</Typography>
+      </Box>
+      
      
     </Box>
   )
