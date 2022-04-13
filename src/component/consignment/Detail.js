@@ -15,12 +15,12 @@ import Table from '../Table';
 export default function Detail({data, deleteCons}) {
   return (
      <>
-      <Box py={2.5} display='flex' justifyContent='space-between'>
+      <Box py={2.5} display='flex' flexDirection={{ xs:'column',sm:'row'}} justifyContent={{ sm:'space-between'}}>
         <div>
           <Typography variant='h5'>{data.name}</Typography>
           <Typography variant='body1' color='textSecondary'>{format(data.date.seconds * 1000, 'MMM do, yyyy')}</Typography>
         </div>
-        <div>
+        <Box sx={{pt:{xs:2}}}>
           <Link href={`/`} >
             <Button
               size='small'
@@ -47,7 +47,7 @@ export default function Detail({data, deleteCons}) {
           >
             delete
           </Button>
-        </div>
+        </Box>
       </Box>
 
       <Grid container spacing={2} sx={{pt:.5}}> 

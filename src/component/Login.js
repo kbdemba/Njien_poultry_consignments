@@ -35,8 +35,20 @@ function Login(props) {
         <Grid item xs={12} md={6}>
           <Box p={2} sx={{minHeight: '100vh', display:'flex', alignItems:'center', justifyContent: 'center'}}>
             <Box sx={{width: '100%', maxWidth: '400px'}}>
-              <Box pb={5}>
-                <Typography variant='h4'>Salam Aunty</Typography>
+              <Box  pt={3} pb={9} sx={{textAlign:'center', display: {md:'none'} }}>
+                <div style={{width:'110px', margin:'0 auto 0px'}}>
+                  <Image 
+                    priority
+                    src={ "/njien_poultry_logo.png"}
+                    alt="Njien poultry logo"
+                    width={994}
+                    height={498}
+                  />
+                </div>
+                <Typography variant='caption' color='textSecondary'>Consignment Data Management</Typography>
+              </Box>
+              <Box pb={4}>
+                <Typography variant='h5'>Salam Aunty</Typography>
                 <Typography color='textSecondary' variant='body1'>Please login to continue</Typography>
               </Box>
               <Typography align='center' color='error' variant='body2'>{error.loginError}</Typography>
@@ -93,7 +105,7 @@ function Login(props) {
           </Box>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Box sx={{background: '#27BFD3', height:'100%',display:'flex', alignItems:'center', justifyContent: 'center', color:'white' }}>
+          <Box sx={{background: '#27BFD3', height:'100%',display:{xs:'none', md:'flex',}, alignItems:'center', justifyContent: 'center', color:'white' }}>
             <Box>
               <div style={{width:'220px', margin:'0 auto 16px'}}>
               <Image 
