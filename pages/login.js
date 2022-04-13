@@ -1,16 +1,14 @@
 import React from 'react'
-import Footer from '../src/component/Footer'
 import Login from '../src/component/Login'
-import AppBar from '../src/component/header/AppBar'
 
-function HomeLogin() {
+import { withPublic } from '../src/hooks/route';
+
+function HomeLogin(props) {
   return (
     <div>
-      {/* <AppBar /> */}
-      <Login />
-      {/* <Footer /> */}
+      <Login auth={props.auth}/>
     </div>
   )
 }
 
-export default HomeLogin
+export default withPublic(HomeLogin);

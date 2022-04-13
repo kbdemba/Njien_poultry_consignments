@@ -1,12 +1,13 @@
 import React from 'react'
 import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
 function Footer() {
   return (
-    <div style={{background: '#27BFD3', padding: '32px 0', color:'whitesmoke'}}>
+    <Box sx={{bgcolor: 'primary.main', p: '32px 0', mt:'56px', color:'white',}}>
       <Typography variant='body1' align='center'>
         Copyright © Njien Poultry 2022
       </Typography>
-    </div>
+    </Box>
   )
 }
 

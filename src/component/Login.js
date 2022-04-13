@@ -6,8 +6,15 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import LinearProgress from '@mui/material/LinearProgress';
 
-function Login() {
+
+function Login(props) {
+  const { 
+    loginWithPassWord,
+    loading,
+    error
+  } = props.auth
 
   const [formValues, setFormValues] = useState({
     email: "",
@@ -19,8 +26,7 @@ function Login() {
   };
   const handleSubmit = e => {
 		e.preventDefault()
-    // setLoading(true)
-    // loginWithPassWord(formValues)
+    loginWithPassWord(formValues)
   };
 
   return (
@@ -33,13 +39,14 @@ function Login() {
                 <Typography variant='h4'>Salam Aunty</Typography>
                 <Typography color='textSecondary' variant='body1'>Please login to continue</Typography>
               </Box>
+              <Typography align='center' color='error' variant='body2'>{error.loginError}</Typography>
               <form onSubmit={handleSubmit}>
                 <TextField
                   // className={classes.textField}
                   variant="standard"
                   margin='normal'
                   required
-                  // error = {!(errors.email === undefined) || errors.wrong_credidentials}
+                  error = {!(error.loginError === undefined)}
                   // helperText={errors.email}
                   onChange={handleInputChange("email")}
                   value={formValues.email}
@@ -54,7 +61,7 @@ function Login() {
                   variant="standard"
                   margin='normal'
                   required
-                  // error = {!(errors.email === undefined) || errors.wrong_credidentials}
+                  error = {!(error.loginError === undefined)}
                   // helperText={errors.email}
                   onChange={handleInputChange("password")}
                   value={formValues.password}
@@ -75,11 +82,11 @@ function Login() {
                     type="submit"
                     fullWidth
                     sx={{color:'white'}}
-                    // className={classes.submitBtn}
-                    // disabled={isLoading}
+                    disabled={loading}
                   >
                     Login
                   </Button>
+                  {loading && <LinearProgress />}
                 </Box>
               </form>
             </Box>
@@ -88,15 +95,16 @@ function Login() {
         <Grid item xs={12} md={6}>
           <Box sx={{background: '#27BFD3', height:'100%',display:'flex', alignItems:'center', justifyContent: 'center', color:'white' }}>
             <Box>
-              <div style={{width:'250px', margin:'0 auto 16px'}}>
+              <div style={{width:'220px', margin:'0 auto 16px'}}>
               <Image 
+                priority
                 src={ "/njien_logo_white.png"}
                 alt="Njien poultry logo"
                 width={994}
                 height={498}
               />
               </div>
-              <Typography variant='h4'>Data Management</Typography>
+              <Typography variant='h5'>Consignment Data Management</Typography>
             </Box>
           </Box>
         </Grid>

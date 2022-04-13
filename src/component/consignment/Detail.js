@@ -1,4 +1,5 @@
 import React from 'react'
+import { format } from 'date-fns'
 import Box from '@mui/material/Box';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,25 +9,38 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
 import LargeCard from './LargeCard';
-import SideCard from './SideCard';
+import SideCard from '../SideCard';
+import Table from '../Table';
 
-export default function Detail({consignmentx}) {
+export default function Detail({data, deleteCons}) {
   return (
      <>
       <Box py={2.5} display='flex' justifyContent='space-between'>
         <div>
-          <Typography variant='h5'>{consignment.name}</Typography>
-          <Typography variant='body1' color='textSecondary'>{consignment.date}</Typography>
+          <Typography variant='h5'>{data.name}</Typography>
+          <Typography variant='body1' color='textSecondary'>{format(data.date.seconds * 1000, 'MMM do, yyyy')}</Typography>
         </div>
         <div>
+          <Link href={`/`} >
+            <Button
+              size='small'
+              // variant='outlined'
+              style={{marginRight:'16px'}}
+            >
+              Go Back
+            </Button>
+          </Link>
+          <Link href={`/consignment/edit/${data.id}`} >
+            <Button
+              size='small'
+              variant='outlined'
+              style={{marginRight:'16px'}}
+            >
+              Edit
+            </Button>
+          </Link>
           <Button
-            size='small'
-            variant='outlined'
-            style={{marginRight:'16px'}}
-          >
-            Edit
-          </Button>
-          <Button
+            onClick={deleteCons}
             size='small'
             color='error'
             variant='outlined'
@@ -41,13 +55,13 @@ export default function Detail({consignmentx}) {
           <div>
             <Grid container spacing={2} > 
               <Grid item xs={12} md={4}>
-                <LargeCard name='Total Cost of Goods' value={consignment.totalCostGoods}/>
+                <LargeCard name='Total Cost of Goods' value={data.totalCostGoods}/>
               </Grid>
                <Grid item xs={12} md={4}>
-                <LargeCard name='Total Extra Costs' value={consignment.totalExtaCost}/>
+                <LargeCard name='Total Extra Costs' value={data.totalExtaCost}/>
               </Grid>
                <Grid item xs={12} md={4}>
-                <LargeCard name='Overall Total Cost' value={consignment.overallTotalCost}/>
+                <LargeCard name='Overall Total Cost' value={data.overallTotalCost}/>
               </Grid>
             </Grid>
           </div>
@@ -55,34 +69,59 @@ export default function Detail({consignmentx}) {
             {/* <Typography color='textSecondary' variant='body1'>Extra Costs</Typography> */}
             <Grid container spacing={2} > 
               <Grid item xs={12} md={3}>
-                <LargeCard name='Transportation' value={consignment.transportation}/>
+                <LargeCard name='Transportation' value={data.transportation}/>
               </Grid>
                <Grid item xs={12} md={3}>
-                <LargeCard name='Total Custom' value={consignment.totalCustom}/>
+                <LargeCard name='Total Custom' value={data.totalCustom}/>
               </Grid>
                <Grid item xs={12} md={3}>
-                <LargeCard name='Total Labor' value={consignment.totalLabor}/>
+                <LargeCard name='Total Labor' value={data.totalLabor}/>
               </Grid>
                <Grid item xs={12} md={3}>
-                <LargeCard name='Extra Cost / Good' value={consignment.extraCostperGood} bgcolorx='#D8F8FC'/>
+                <LargeCard name='Extra Cost / Good' value={data.extraCostperGood} bgcolorx='#D8F8FC'/>
               </Grid>
               
             </Grid>
           </div>
-          <div style={{paddingTop: '16px'}}>
-            <Button>View Notes</Button>
-          </div>
+
+          <Box pt={1} pb={2} px={1.5} mt={2}
+            sx={{
+              borderRadius: '5px',
+              boxShadow: '2px 2px 8px -1px rgba(0,0,0,0.1)',
+              transition: 'box-shadow .3s ease-out',
+              bgcolor: 'background.paper',
+            }}
+        >
+          <Typography variant='caption' color='textSecondary'>Remarks</Typography>
+          <Typography variant='body2' color='textSecondary'>{data.remarks}</Typography>
+        </Box>
         
         </Grid>
         <Grid item xs={12} sm={12} md={3}> 
           <SideCard 
-            conversion={consignment.conversion} customPayBag={consignment.customPayBag} laborBag={consignment.laborBag}
-            totalItems={consignment.totalItems} totalBags={consignment.totalBags} totalweight={consignment.totalweight}
+            conversion={data.conversion} customPayBag={data.customPayBag} laborBag={data.laborBag}
+            totalItems={data.totalItems} totalBags={data.totalBags} totalweight={data.totalweight}
           />
         </Grid>
       </Grid>
-      <div>
-        Table in here
+      <div style={{padding: '40px 0 100px'}}>
+        <Table 
+          title={'Items Bought'}
+          data={data.items}
+          columns={[
+            { field: "name", title: "Name" },
+            { field: "numberOfBags", title: "Number of Bags" },
+            { field: "weight", title: "Weight" },
+            { field: "unitCostCFA", title: "Unit Cost (CFA)" },
+            { field: "unitCostGMD", title: "Unit Cost (CFA)" },
+            { field: "totalCostCFA", title: "Total Cost (CFA)" },
+            { field: "totalCostGMD", title: "Total Cost (GMD)" },
+            { field: "trueCostItem", title: "True Cost / Item" },
+            { field: "totlaTrueCost", title: "TotaL True Cost" },
+            // { field: "numberOfBags", title: "weight" },
+            
+          ]}
+        />
       </div>
     </>
   )
@@ -102,8 +141,6 @@ const consignment = {
   totalCustom: 444,
   totalLabor: 444,
 
-  extraCostperGood: 17,
-
   totalItems: 450,
   totalBags: 444,
   totalweight: 444,
@@ -112,11 +149,13 @@ const consignment = {
   totalExtaCost: 3500,  //Show extar cost per good
   overallTotalCost: 12000,
 
-  
+  extraCostperGood: 17,
+    
   notes: 'Some Notes about this consignment',
 
-  item:[
+  items:[
     {
+      id:'1',
       name: 'Ladoum',
       numberOfBags: 230,
       weight: 2,
@@ -128,7 +167,8 @@ const consignment = {
       totlaTrueCost: 544545, //remove
     },
     {
-      name: 'Ladoum',
+      id:'2',
+      name: 'churai',
       numberOfBags: 230,
       weight: 2,
       unitCostCFA: 7800,
