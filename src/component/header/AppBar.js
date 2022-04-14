@@ -13,15 +13,18 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container'
 import LogoutIcon from '@mui/icons-material/Logout';
+import CalculateIcon from '@mui/icons-material/Calculate';
 import Divider from '@mui/material/Divider';
 
 import LogoutModal from '../LogoutModal';
+import ConversionCalcModal from '../ConversionCalcModal'
 import useAuth from '../../hooks/auth';
 
-export default function MenuAppBar() {
+export default function MenuAppBar({hideCalculator}) {
   const {user, logout} = useAuth();
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
+  const [openCalc, setOpenCalc] = useState(false);
 
   const handleMenuProfile = (event) => {
     setAnchorEl(event.currentTarget);
@@ -40,6 +43,12 @@ export default function MenuAppBar() {
   const handleClickLogout = ()=>{
     handleCloseMenu()
     setOpen(true)
+  }
+  const handleCloseCalc = ()=>{
+    setOpenCalc(false)
+  }
+  const handleOpenCalc = () => {
+    setOpenCalc(true)
   }
 
   return (
@@ -89,6 +98,18 @@ export default function MenuAppBar() {
               <MenuItem onClick={handleClickLogout}><LogoutIcon style={{marginRight: '10px'}} />Logout</MenuItem>
             </Menu>
           </div> */}
+          {!hideCalculator &&
+            <IconButton
+              // size="large"
+              // edge="start"
+              onClick={handleOpenCalc}
+              color="primary"
+              aria-label="Rate calculator"
+              sx={{ mr: 2 }}
+            >
+              <CalculateIcon />
+            </IconButton>
+          }
           <Button
             size='small'
             onClick={handleClickLogout}
@@ -114,6 +135,14 @@ export default function MenuAppBar() {
         handleClose={handleCloseLogout}
         handleConfirm={handleLogout}
       />
+      {!hideCalculator && openCalc &&
+        <ConversionCalcModal
+          open={openCalc}
+          handleClose={handleCloseCalc}
+          // handleConfirm={handleLogout}
+        />
+      }
+      
     </>
   );
 }
