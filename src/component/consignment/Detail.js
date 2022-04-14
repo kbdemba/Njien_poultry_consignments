@@ -117,9 +117,7 @@ export default function Detail({data, deleteCons}) {
             { field: "totalCostCFA", title: "Total Cost (CFA)" },
             { field: "totalCostGMD", title: "Total Cost (GMD)" },
             { field: "trueCostItem", title: "True Cost / Item" },
-            { field: "totlaTrueCost", title: "TotaL True Cost" },
-            // { field: "numberOfBags", title: "weight" },
-            
+            // { field: "totlaTrueCost", title: "TotaL True Cost" },            
           ]}
         />
       </div>
