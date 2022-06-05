@@ -28,7 +28,7 @@ function SideCard(props) {
       }}
     >
       <Box py={1} display={'flex'} justifyContent='space-between' alignItems='center'>
-        <Typography variant='body2' color='textSecondary'>Conversion / 500 CFA</Typography>
+        <Typography variant='body2' color='textSecondary'>Conversion / 5000 CFA</Typography>
         <Typography>{conversion}</Typography>
       </Box>
       <Box py={1} display={'flex'} justifyContent='space-between' alignItems='center'>
