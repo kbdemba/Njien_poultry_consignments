@@ -202,7 +202,7 @@ function NewConsignment(props) {
   const actions = [
     {
       icon: ()=> <EditIcon color='action'/>,
-      tooltip: 'Delete Row',
+      tooltip: 'Edit Row',
       onClick: (event, rowData) => openEditItem(rowData.name)
     },
     {

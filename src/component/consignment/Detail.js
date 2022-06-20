@@ -113,7 +113,7 @@ export default function Detail({data, deleteCons}) {
             { field: "numberOfBags", title: "Number of Bags" },
             { field: "weight", title: "Weight" },
             { field: "unitCostCFA", title: "Unit Cost (CFA)" },
-            { field: "unitCostGMD", title: "Unit Cost (CFA)" },
+            { field: "unitCostGMD", title: "Unit Cost (GMD)" },
             { field: "totalCostCFA", title: "Total Cost (CFA)" },
             { field: "totalCostGMD", title: "Total Cost (GMD)" },
             { field: "trueCostItem", title: "True Cost / Item" },
